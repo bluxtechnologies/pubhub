@@ -17,6 +17,7 @@ const ProfilePage = lazy(() => import('../pages/ProfilePage').then((m) => ({ def
 const NotificationsPage = lazy(() => import('../pages/NotificationsPage').then((m) => ({ default: m.NotificationsPage })));
 const FollowingPage = lazy(() => import('../pages/FollowingPage').then((m) => ({ default: m.FollowingPage })));
 const AuthorPage = lazy(() => import('../pages/AuthorPage').then((m) => ({ default: m.AuthorPage })));
+const GenrePage = lazy(() => import('../pages/GenrePage').then((m) => ({ default: m.GenrePage })));
 const SettingsPage = lazy(() => import('../pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const LoginPage = lazy(() => import('../pages/LoginPage').then((m) => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('../pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
@@ -48,6 +49,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/books/:bookId" element={<BookDetailPage />} />
         <Route path="/read/:bookId/:chapterId" element={<ReaderPage />} />
         <Route path="/authors/:authorId" element={<AuthorPage />} />
+        <Route path="/genre/:genreSlug" element={<GenrePage />} />
 
         {/* Authenticated user routes */}
         <Route path="/library" element={<ProtectedRoute><LibraryPage /></ProtectedRoute>} />

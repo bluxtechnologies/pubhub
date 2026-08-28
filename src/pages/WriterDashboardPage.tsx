@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   PencilSquareIcon,
   PlusIcon,
@@ -19,6 +20,7 @@ import { Checkbox } from '../components/ui/Checkbox';
 import { Skeleton } from '../components/ui/Skeleton';
 import { useWriterAnalytics, useUserBooks, useCreateBook } from '../hooks/useWriter';
 import { useToast } from '../components/ui/ToastProvider';
+import { SparklineChart } from '../components/ui/SparklineChart';
 import { formatNumber } from '../lib/utils/cn';
 
 export const WriterDashboardPage: React.FC = () => {
@@ -93,52 +95,64 @@ export const WriterDashboardPage: React.FC = () => {
 
         {/* Analytics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card padded className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-brand-50 text-brand-900 flex items-center justify-center">
-              <EyeIcon className="w-6 h-6" />
+          <Card padded className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-brand-50 text-brand-900 flex items-center justify-center shrink-0">
+                <EyeIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 block font-medium">Total Lifetime Reads</span>
+                <span className="text-xl font-serif font-bold text-slate-900">
+                  {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalReads || 0)}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-xs text-slate-500 block font-medium">Total Lifetime Reads</span>
-              <span className="text-xl font-serif font-bold text-slate-900">
-                {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalReads || 0)}
-              </span>
-            </div>
+            <SparklineChart data={[320, 410, 390, 520, 480, 610, 580, 720, 695, 810, 780, 920]} color="#190191" label="reads" />
           </Card>
 
-          <Card padded className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
-              <HeartIcon className="w-6 h-6" />
+          <Card padded className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                <HeartIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 block font-medium">Total Reader Likes</span>
+                <span className="text-xl font-serif font-bold text-slate-900">
+                  {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalLikes || 0)}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-xs text-slate-500 block font-medium">Total Reader Likes</span>
-              <span className="text-xl font-serif font-bold text-slate-900">
-                {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalLikes || 0)}
-              </span>
-            </div>
+            <SparklineChart data={[80, 120, 95, 140, 115, 180, 160, 200, 190, 230, 215, 260]} color="#e11d48" label="likes" />
           </Card>
 
-          <Card padded className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-              <UserGroupIcon className="w-6 h-6" />
+          <Card padded className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <UserGroupIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 block font-medium">Story Subscribers</span>
+                <span className="text-xl font-serif font-bold text-slate-900">
+                  {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalFollowers || 0)}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-xs text-slate-500 block font-medium">Story Subscribers</span>
-              <span className="text-xl font-serif font-bold text-slate-900">
-                {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : formatNumber(analytics?.totalFollowers || 0)}
-              </span>
-            </div>
+            <SparklineChart data={[200, 220, 215, 240, 230, 260, 255, 280, 275, 300, 295, 320]} color="#059669" label="subscribers" />
           </Card>
 
-          <Card padded className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-              <ChartBarIcon className="w-6 h-6" />
+          <Card padded className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                <ChartBarIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 block font-medium">Estimated Royalty</span>
+                <span className="text-xl font-serif font-bold text-slate-900">
+                  {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : analytics?.totalEarnings || '$0.00'}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-xs text-slate-500 block font-medium">Estimated Royalty</span>
-              <span className="text-xl font-serif font-bold text-slate-900">
-                {loadingAnalytics ? <Skeleton className="h-6 w-16" /> : analytics?.totalEarnings || '$0.00'}
-              </span>
-            </div>
+            <SparklineChart data={[0, 12, 8, 24, 18, 34, 28, 42, 38, 55, 48, 64]} color="#d97706" label="earnings" />
           </Card>
         </div>
 
@@ -186,12 +200,16 @@ export const WriterDashboardPage: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <Button variant="outline" size="sm">
-                      Manage Chapters
-                    </Button>
-                    <Button variant="primary" size="sm" leftIcon={<PlusIcon className="w-3.5 h-3.5" />}>
-                      New Chapter
-                    </Button>
+                    <Link to={`/write/books/${book.id}/chapters`}>
+                      <Button variant="outline" size="sm">
+                        Manage Chapters
+                      </Button>
+                    </Link>
+                    <Link to={`/write/books/${book.id}/chapters/new`}>
+                      <Button variant="primary" size="sm" leftIcon={<PlusIcon className="w-3.5 h-3.5" />}>
+                        New Chapter
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}

@@ -5,6 +5,7 @@ import { AppShell } from '../components/layout/AppShell';
 import { BookCover } from '../components/books/BookCover';
 import { SaveButton } from '../components/books/SaveButton';
 import { FollowButton } from '../components/social/FollowButton';
+import { CommentSection } from '../components/social/CommentSection';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { Avatar } from '../components/ui/Avatar';
@@ -12,7 +13,6 @@ import { Tabs } from '../components/ui/Tabs';
 import { Skeleton } from '../components/ui/Skeleton';
 import { ErrorState } from '../components/ui/ErrorState';
 import { useBookDetails, useBookChapters } from '../hooks/useBooks';
-import { MOCK_COMMENTS } from '../lib/mock/data';
 import { formatNumber } from '../lib/utils/cn';
 
 export const BookDetailPage: React.FC = () => {
@@ -40,7 +40,7 @@ export const BookDetailPage: React.FC = () => {
 
   const tabs = [
     { id: 'chapters', label: 'Table of Contents', count: chapters.length },
-    { id: 'comments', label: 'Discussion', count: MOCK_COMMENTS.length },
+    { id: 'comments', label: 'Discussion', count: 3 },
   ];
 
   return (
@@ -53,9 +53,9 @@ export const BookDetailPage: React.FC = () => {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
               {book.genres.map((g) => (
-                <Badge key={g} variant="brand">
-                  {g}
-                </Badge>
+                <Link key={g} to={`/genre/${g.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Badge variant="brand">{g}</Badge>
+                </Link>
               ))}
               <Badge variant={book.status === 'completed' ? 'success' : 'warning'} className="uppercase tracking-wider font-bold">
                 {book.status}
@@ -162,46 +162,7 @@ export const BookDetailPage: React.FC = () => {
           )}
 
           {activeTab === 'comments' && (
-            <div className="space-y-4">
-              <div className="flex gap-3 mb-6">
-                <input
-                  type="text"
-                  placeholder="Share your thoughts on this story..."
-                  className="flex-1 px-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-brand-900"
-                />
-                <Button variant="primary" size="md">
-                  Post Comment
-                </Button>
-              </div>
-
-              <div className="space-y-4 divide-y divide-slate-100">
-                {MOCK_COMMENTS.map((c) => (
-                  <div key={c.id} className="pt-4 first:pt-0">
-                    <div className="flex items-start gap-3">
-                      <Avatar src={c.author.avatar} name={c.author.name} size="sm" />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="font-bold text-xs text-slate-900">{c.author.name}</span>
-                          <span className="text-[10px] text-slate-400">{c.createdAt}</span>
-                        </div>
-                        <p className="text-xs text-slate-700 mt-1 leading-relaxed">{c.content}</p>
-
-                        {/* Nested Replies */}
-                        {c.replies?.map((r) => (
-                          <div key={r.id} className="mt-3 pl-4 border-l-2 border-brand-200 flex items-start gap-2.5">
-                            <Avatar src={r.author.avatar} name={r.author.name} size="xs" />
-                            <div>
-                              <span className="font-bold text-xs text-slate-900">{r.author.name}</span>
-                              <p className="text-xs text-slate-700 mt-0.5">{r.content}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <CommentSection bookId={bookId} />
           )}
         </div>
       </div>
