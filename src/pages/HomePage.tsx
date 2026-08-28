@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SparklesIcon, FireIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon } from '@heroicons/react/24/outline';
 import { AppShell } from '../components/layout/AppShell';
 import { BookCardHorizontal } from '../components/books/BookCardHorizontal';
 import { ActivityCard } from '../components/social/ActivityCard';
@@ -25,7 +25,7 @@ export const HomePage: React.FC = () => {
   return (
     <AppShell>
       <div className="space-y-4">
-        {/* Rokan Style Sub-Header Feed Tabs */}
+        {/* Sub-Header Feed Tabs */}
         <div className="bg-white border border-slate-200/80 rounded-2xl p-1.5 flex items-center gap-1 shadow-subtle overflow-x-auto">
           {feedTabs.map((tab) => (
             <button
@@ -33,7 +33,7 @@ export const HomePage: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-emerald-50 text-emerald-700 shadow-sm'
+                  ? 'bg-brand-50 text-brand-900 shadow-sm'
                   : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -47,10 +47,10 @@ export const HomePage: React.FC = () => {
           <section>
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-xs font-extrabold tracking-wider text-slate-400 uppercase flex items-center gap-1.5 px-1">
-                <SparklesIcon className="w-3.5 h-3.5 text-emerald-600" />
+                <SparklesIcon className="w-3.5 h-3.5 text-brand-900" />
                 <span>Continue Reading</span>
               </h2>
-              <Link to="/library" className="text-xs text-emerald-600 font-bold hover:underline">
+              <Link to="/library" className="text-xs text-brand-900 font-bold hover:underline">
                 View Library
               </Link>
             </div>

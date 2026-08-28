@@ -33,7 +33,7 @@ export const LibraryPage: React.FC = () => {
       <div className="space-y-6">
         {/* Library Header */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-brand-50 text-brand-900 flex items-center justify-center">
             <BookmarkSolid className="w-5 h-5" />
           </div>
           <div>
@@ -128,7 +128,7 @@ export const LibraryPage: React.FC = () => {
                         <div className="flex items-center gap-2 mt-1">
                           <div className="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
                             <div
-                              className="bg-emerald-600 h-full rounded-full"
+                              className="bg-brand-900 h-full rounded-full"
                               style={{ width: `${item.progressPercentage}%` }}
                             />
                           </div>

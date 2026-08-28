@@ -58,7 +58,7 @@ export const Sidebar: React.FC = () => {
                   cn(
                     'flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all select-none',
                     isActive
-                      ? 'bg-emerald-50 text-emerald-700 font-bold'
+                      ? 'bg-brand-50 text-brand-900 font-bold'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   )
                 }
@@ -67,7 +67,7 @@ export const Sidebar: React.FC = () => {
                   const Icon = isActive ? item.activeIcon : item.icon;
                   return (
                     <>
-                      <Icon className={cn('w-4 h-4', isActive ? 'text-emerald-700' : 'text-slate-400')} />
+                      <Icon className={cn('w-4 h-4', isActive ? 'text-brand-900' : 'text-slate-400')} />
                       <span>{item.label}</span>
                     </>
                   );
@@ -91,7 +91,7 @@ export const Sidebar: React.FC = () => {
                   cn(
                     'flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all select-none',
                     isActive
-                      ? 'bg-emerald-50 text-emerald-700 font-bold'
+                      ? 'bg-brand-50 text-brand-900 font-bold'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   )
                 }
@@ -100,7 +100,7 @@ export const Sidebar: React.FC = () => {
                   const Icon = isActive ? item.activeIcon : item.icon;
                   return (
                     <>
-                      <Icon className={cn('w-4 h-4', isActive ? 'text-emerald-700' : 'text-slate-400')} />
+                      <Icon className={cn('w-4 h-4', isActive ? 'text-brand-900' : 'text-slate-400')} />
                       <span>{item.label}</span>
                     </>
                   );
@@ -111,7 +111,7 @@ export const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Guest Sign In / Join Card (matching Rokan bottom card) */}
+      {/* Guest Sign In / Join Card */}
       {!isAuthenticated && (
         <div className="pt-4 border-t border-slate-100">
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-center space-y-2.5">
@@ -121,7 +121,7 @@ export const Sidebar: React.FC = () => {
             </p>
             <div className="space-y-1.5 pt-1">
               <Link to="/login" className="block">
-                <Button variant="primary" size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-full">
+                <Button variant="primary" size="sm" className="w-full rounded-full">
                   Sign in
                 </Button>
               </Link>

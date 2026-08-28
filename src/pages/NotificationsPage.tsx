@@ -32,8 +32,8 @@ export const NotificationsPage: React.FC = () => {
     like: 'bg-rose-50 text-rose-700 border-rose-200',
     comment: 'bg-amber-50 text-amber-700 border-amber-200',
     reply: 'bg-amber-50 text-amber-700 border-amber-200',
-    new_chapter: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    publish: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    new_chapter: 'bg-brand-50 text-brand-900 border-brand-200',
+    publish: 'bg-brand-50 text-brand-900 border-brand-200',
   };
 
   const typeLabel: Record<string, string> = {
@@ -51,7 +51,7 @@ export const NotificationsPage: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-brand-50 text-brand-900 flex items-center justify-center">
               <BellIcon className="w-5 h-5" />
             </div>
             <div>
@@ -72,14 +72,14 @@ export const NotificationsPage: React.FC = () => {
           )}
         </div>
 
-        {/* Logged Out / Guest State matching Screenshot 1 */}
+        {/* Logged Out / Guest State */}
         {!isAuthenticated ? (
           <div className="bg-white border border-slate-200/80 rounded-2xl p-10 shadow-subtle text-center space-y-4 my-8">
-            <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-2">
+            <div className="w-16 h-16 rounded-full bg-brand-50 text-brand-900 flex items-center justify-center mx-auto mb-2">
               <BellIcon className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 block">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-brand-900 block">
                 Your PubHub Activity
               </span>
               <h2 className="font-serif font-bold text-2xl text-slate-900">Never miss an update</h2>
@@ -90,7 +90,7 @@ export const NotificationsPage: React.FC = () => {
 
             <div className="flex items-center justify-center gap-3 pt-2">
               <Link to="/login">
-                <Button variant="primary" size="md" className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-6">
+                <Button variant="primary" size="md" className="rounded-full px-6">
                   Sign in
                 </Button>
               </Link>
@@ -118,14 +118,14 @@ export const NotificationsPage: React.FC = () => {
                   <div
                     key={notif.id}
                     className={`flex items-start gap-3 p-4 hover:bg-slate-50 transition-colors cursor-pointer ${
-                      !notif.read ? 'bg-emerald-50/20 border-l-2 border-emerald-600' : ''
+                      !notif.read ? 'bg-brand-50/20 border-l-2 border-brand-900' : ''
                     }`}
                     onClick={() => !notif.read && markReadMutation.mutate(notif.id)}
                   >
                     <div className="relative shrink-0">
                       <Avatar src={notif.sender.avatar} name={notif.sender.name} size="md" />
                       {!notif.read && (
-                        <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-600 rounded-full ring-2 ring-white" />
+                        <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-brand-900 rounded-full ring-2 ring-white" />
                       )}
                     </div>
 
@@ -147,7 +147,7 @@ export const NotificationsPage: React.FC = () => {
                       {notif.targetBook && (
                         <Link
                           to={`/books/${notif.targetBook.id}`}
-                          className="inline-flex items-center gap-2 mt-1 text-[11px] text-emerald-700 font-semibold hover:underline"
+                          className="inline-flex items-center gap-2 mt-1 text-[11px] text-brand-900 font-semibold hover:underline"
                         >
                           <img
                             src={notif.targetBook.coverImage}

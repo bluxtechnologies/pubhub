@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PencilIcon, CameraIcon, ShareIcon, SparklesIcon, FireIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, CameraIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { AppShell } from '../components/layout/AppShell';
 import { Avatar } from '../components/ui/Avatar';
 import { Badge } from '../components/ui/Badge';
@@ -39,7 +39,7 @@ export const ProfilePage: React.FC = () => {
         {/* Profile Hero Card */}
         <div className="bg-white border border-slate-200/80 rounded-2xl shadow-subtle overflow-hidden">
           {/* Cover banner */}
-          <div className="h-32 sm:h-48 bg-gradient-to-br from-emerald-800 via-teal-900 to-slate-900 relative">
+          <div className="h-32 sm:h-48 bg-gradient-to-br from-brand-950 via-brand-900 to-indigo-950 relative">
             <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors">
               <CameraIcon className="w-4 h-4" />
             </button>
@@ -56,7 +56,7 @@ export const ProfilePage: React.FC = () => {
                   isOnline
                   className="ring-4 ring-white"
                 />
-                <button className="absolute bottom-0 right-0 w-7 h-7 bg-emerald-600 text-white rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors">
+                <button className="absolute bottom-0 right-0 w-7 h-7 bg-brand-900 text-white rounded-full flex items-center justify-center hover:bg-brand-800 transition-colors">
                   <CameraIcon className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -66,7 +66,7 @@ export const ProfilePage: React.FC = () => {
                   Share Profile
                 </Button>
                 <Link to="/settings">
-                  <Button variant="primary" size="sm" className="bg-emerald-600 hover:bg-emerald-700" leftIcon={<PencilIcon className="w-4 h-4" />}>
+                  <Button variant="primary" size="sm" leftIcon={<PencilIcon className="w-4 h-4" />}>
                     Edit Profile
                   </Button>
                 </Link>

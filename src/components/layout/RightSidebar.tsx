@@ -6,7 +6,6 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/outline';
 import { Avatar } from '../ui/Avatar';
-import { Button } from '../ui/Button';
 import { FollowButton } from '../social/FollowButton';
 import { MOCK_AUTHORS } from '../../lib/mock/data';
 
@@ -22,18 +21,18 @@ export const RightSidebar: React.FC = () => {
         <input
           type="search"
           placeholder="Search authors, books, genres..."
-          className="w-full h-9 pl-9 pr-4 bg-slate-100/90 hover:bg-slate-100 focus:bg-white border border-transparent focus:border-emerald-600 rounded-full text-xs text-slate-900 placeholder:text-slate-400 transition-all focus:outline-none focus:ring-1 focus:ring-emerald-600"
+          className="w-full h-9 pl-9 pr-4 bg-slate-100/90 hover:bg-slate-100 focus:bg-white border border-transparent focus:border-brand-900 rounded-full text-xs text-slate-900 placeholder:text-slate-400 transition-all focus:outline-none focus:ring-1 focus:ring-brand-900"
         />
       </div>
 
-      {/* Trending Authors Widget (Rokan style) */}
+      {/* Trending Authors Widget */}
       <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 uppercase tracking-wider">
-            <SparklesIcon className="w-4 h-4 text-emerald-600" />
+            <SparklesIcon className="w-4 h-4 text-brand-900" />
             <span>Trending Authors</span>
           </div>
-          <Link to="/discover" className="text-[11px] font-bold text-emerald-600 hover:underline">
+          <Link to="/discover" className="text-[11px] font-bold text-brand-900 hover:underline">
             View all
           </Link>
         </div>
@@ -47,15 +46,15 @@ export const RightSidebar: React.FC = () => {
                   <div className="flex items-center gap-1">
                     <Link
                       to={`/authors/${author.id}`}
-                      className="font-bold text-xs text-slate-900 hover:text-emerald-600 truncate block"
+                      className="font-bold text-xs text-slate-900 hover:text-brand-900 truncate block"
                     >
                       {author.name}
                     </Link>
-                    <CheckBadgeIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <CheckBadgeIcon className="w-3.5 h-3.5 text-brand-900 shrink-0" />
                   </div>
                   <span className="text-[11px] text-slate-400 block truncate">@{author.username}</span>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="inline-flex items-center text-[10px] font-bold text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded-full">
+                    <span className="inline-flex items-center text-[10px] font-bold text-brand-900 bg-brand-50 border border-brand-200/60 px-1.5 py-0.2 rounded-full">
                       {author.followerCount > 1000 ? `${(author.followerCount / 1000).toFixed(1)}k` : author.followerCount} Followers
                     </span>
                   </div>
@@ -83,11 +82,11 @@ export const RightSidebar: React.FC = () => {
                   <div className="flex items-center gap-1">
                     <Link
                       to={`/authors/${author.id}`}
-                      className="font-bold text-xs text-slate-900 hover:text-emerald-600 truncate block"
+                      className="font-bold text-xs text-slate-900 hover:text-brand-900 truncate block"
                     >
                       {author.name}
                     </Link>
-                    <CheckBadgeIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <CheckBadgeIcon className="w-3.5 h-3.5 text-brand-900 shrink-0" />
                   </div>
                   <span className="text-[11px] text-slate-400 block truncate">
                     {author.bio ? author.bio.slice(0, 30) + '...' : 'Storyteller'}

@@ -152,7 +152,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
         Discussion ({comments.length} comments)
       </h3>
 
-      {/* Guest Lock Widget matching Screenshot 2 */}
+      {/* Guest Lock Widget */}
       {!isAuthenticated ? (
         <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-center space-y-3">
           <h4 className="font-serif font-bold text-slate-900 text-base">Join the conversation</h4>
@@ -166,7 +166,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
               </Button>
             </Link>
             <Link to="/register">
-              <Button variant="primary" size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-5">
+              <Button variant="primary" size="sm" className="rounded-full px-5">
                 Create account
               </Button>
             </Link>
@@ -181,7 +181,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
             size="md"
             className="shrink-0 mt-0.5"
           />
-          <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 focus-within:border-emerald-600 focus-within:bg-white transition-all">
+          <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 focus-within:border-brand-900 focus-within:bg-white transition-all">
             <textarea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
@@ -191,7 +191,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
             />
             {newComment.trim() && (
               <div className="flex justify-end mt-2">
-                <Button type="submit" variant="primary" size="sm" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" variant="primary" size="sm">
                   Post Comment
                 </Button>
               </div>
@@ -208,7 +208,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
             <div className="flex-1 min-w-0">
               <div className="bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <Link to={`/authors/${cmt.user.id}`} className="font-bold text-sm text-slate-900 hover:text-emerald-700">
+                  <Link to={`/authors/${cmt.user.id}`} className="font-bold text-sm text-slate-900 hover:text-brand-900">
                     {cmt.user.name}
                   </Link>
                   <span className="text-slate-300">·</span>
@@ -222,7 +222,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
                   onClick={() => toggleLike(cmt.id)}
                   className={cn(
                     'inline-flex items-center gap-1 text-xs font-semibold transition-colors',
-                    cmt.isLiked ? 'text-emerald-700' : 'text-slate-500 hover:text-emerald-700'
+                    cmt.isLiked ? 'text-brand-900' : 'text-slate-500 hover:text-brand-900'
                   )}
                 >
                   {cmt.isLiked ? (
@@ -236,7 +236,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
                 {isAuthenticated && (
                   <button
                     onClick={() => setReplyingTo(replyingTo === cmt.id ? null : cmt.id)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-emerald-700 transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-brand-900 transition-colors"
                   >
                     <ChatBubbleLeftIcon className="w-3.5 h-3.5" />
                     Reply
@@ -267,7 +267,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
                           <p className="text-xs text-slate-700 leading-relaxed">{reply.text}</p>
                         </div>
                         <div className="flex items-center gap-2 mt-1 pl-1">
-                          <button className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-emerald-700 transition-colors">
+                          <button className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-brand-900 transition-colors">
                             <HandThumbUpIcon className="w-3 h-3" />
                             {reply.likesCount > 0 && reply.likesCount}
                           </button>
@@ -290,7 +290,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
                     size="sm"
                     className="shrink-0 mt-0.5"
                   />
-                  <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus-within:border-emerald-600 transition-all">
+                  <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus-within:border-brand-900 transition-all">
                     <input
                       type="text"
                       autoFocus
@@ -301,7 +301,7 @@ export const CommentSection: React.FC<CommentThreadProps> = ({
                     />
                     {replyText.trim() && (
                       <div className="flex justify-end mt-1.5">
-                        <Button type="submit" variant="primary" size="sm" className="bg-emerald-600 hover:bg-emerald-700">
+                        <Button type="submit" variant="primary" size="sm">
                           Reply
                         </Button>
                       </div>
