@@ -88,7 +88,7 @@ export const DiscoverPage: React.FC = () => {
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
               <Skeleton className="h-72 w-full" />
               <Skeleton className="h-72 w-full" />
               <Skeleton className="h-72 w-full" />
@@ -106,7 +106,7 @@ export const DiscoverPage: React.FC = () => {
               }}
             />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
               {books.map((book) => (
                 <BookCard key={book.id} book={book} />
               ))}
