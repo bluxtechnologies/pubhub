@@ -9,9 +9,10 @@ import {
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
-import { CURRENT_USER } from '../../lib/mock/data';
 import { Avatar } from '../ui/Avatar';
+import { Button } from '../ui/Button';
 import { useNotifications } from '../../hooks/useFeed';
+import { useAuth } from '../../features/auth/AuthProvider';
 
 export const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,6 +20,7 @@ export const Header: React.FC = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const navigate = useNavigate();
 
+  const { user, isAuthenticated, logout } = useAuth();
   const { data: notifications = [] } = useNotifications();
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -71,97 +73,98 @@ export const Header: React.FC = () => {
           </button>
         </Link>
 
-        {/* Notifications Popover */}
-        <div className="relative">
-          <Link to="/notifications" onClick={() => setShowNotifications(!showNotifications)}>
-            <button
-              className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <BellIcon className="w-5 h-5" />
-              {unreadCount > 0 && (
-                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-600 rounded-full ring-2 ring-white animate-pulse" />
-              )}
-            </button>
-          </Link>
-
-          {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white border border-slate-200 rounded-lg shadow-elevated z-50 overflow-hidden animate-in fade-in zoom-in-95">
-              <div className="p-3.5 border-b border-slate-100 flex items-center justify-between">
-                <h4 className="font-bold text-sm text-slate-900">Notifications</h4>
-                <span className="text-xs text-brand-900 font-medium cursor-pointer">Mark all as read</span>
-              </div>
-              <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
-                {notifications.map((n) => (
-                  <div key={n.id} className={`p-3 text-xs flex gap-3 hover:bg-slate-50 ${!n.read ? 'bg-brand-50/30' : ''}`}>
-                    <Avatar src={n.sender.avatar} name={n.sender.name} size="sm" />
-                    <div>
-                      <p className="text-slate-800">
-                        <span className="font-semibold text-slate-900">{n.sender.name}</span> {n.text}
-                      </p>
-                      <span className="text-[10px] text-slate-400 mt-1 block">{n.createdAt}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Profile Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => {
-              setShowProfileMenu(!showProfileMenu);
-              setShowNotifications(false);
-            }}
-            className="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-slate-200 transition-all"
-          >
-            <Avatar src={CURRENT_USER.avatar} name={CURRENT_USER.name} size="sm" isOnline />
-          </button>
-
-          {showProfileMenu && (
-            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-lg shadow-elevated z-50 p-1.5 animate-in fade-in zoom-in-95">
-              <div className="px-3 py-2 border-b border-slate-100 mb-1">
-                <p className="font-bold text-sm text-slate-900 truncate">{CURRENT_USER.name}</p>
-                <p className="text-xs text-slate-500 truncate">@{CURRENT_USER.username}</p>
-              </div>
-
-              <Link
-                to="/profile"
-                className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
-                onClick={() => setShowProfileMenu(false)}
-              >
-                <UserIcon className="w-4 h-4 text-slate-400" />
-                <span>My Profile</span>
-              </Link>
-
-              <Link
-                to="/write"
-                className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
-                onClick={() => setShowProfileMenu(false)}
-              >
-                <PencilSquareIcon className="w-4 h-4 text-slate-400" />
-                <span>Writer Dashboard</span>
-              </Link>
-
-              <Link
-                to="/settings"
-                className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
-                onClick={() => setShowProfileMenu(false)}
-              >
-                <Cog6ToothIcon className="w-4 h-4 text-slate-400" />
-                <span>Settings</span>
-              </Link>
-
-              <div className="border-t border-slate-100 mt-1 pt-1">
-                <button className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-md">
-                  <ArrowRightOnRectangleIcon className="w-4 h-4" />
-                  <span>Log Out</span>
+        {isAuthenticated && user ? (
+          <>
+            {/* Notifications Popover */}
+            <div className="relative">
+              <Link to="/notifications" onClick={() => setShowNotifications(!showNotifications)}>
+                <button className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors">
+                  <BellIcon className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-600 rounded-full ring-2 ring-white animate-pulse" />
+                  )}
                 </button>
-              </div>
+              </Link>
             </div>
-          )}
-        </div>
+
+            {/* Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setShowProfileMenu(!showProfileMenu);
+                  setShowNotifications(false);
+                }}
+                className="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-slate-200 transition-all"
+              >
+                <Avatar src={user.avatar} name={user.name} size="sm" isOnline />
+              </button>
+
+              {showProfileMenu && (
+                <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-lg shadow-elevated z-50 p-1.5 animate-in fade-in zoom-in-95">
+                  <div className="px-3 py-2 border-b border-slate-100 mb-1">
+                    <p className="font-bold text-sm text-slate-900 truncate">{user.name}</p>
+                    <p className="text-xs text-slate-500 truncate">@{user.username}</p>
+                  </div>
+
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
+                    onClick={() => setShowProfileMenu(false)}
+                  >
+                    <UserIcon className="w-4 h-4 text-slate-400" />
+                    <span>My Profile</span>
+                  </Link>
+
+                  <Link
+                    to="/write"
+                    className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
+                    onClick={() => setShowProfileMenu(false)}
+                  >
+                    <PencilSquareIcon className="w-4 h-4 text-slate-400" />
+                    <span>Writer Dashboard</span>
+                  </Link>
+
+                  <Link
+                    to="/settings"
+                    className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-md"
+                    onClick={() => setShowProfileMenu(false)}
+                  >
+                    <Cog6ToothIcon className="w-4 h-4 text-slate-400" />
+                    <span>Settings</span>
+                  </Link>
+
+                  <div className="border-t border-slate-100 mt-1 pt-1">
+                    <button
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        logout();
+                        navigate('/');
+                      }}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-md"
+                    >
+                      <ArrowRightOnRectangleIcon className="w-4 h-4" />
+                      <span>Log Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          /* Guest Actions */
+          <div className="flex items-center gap-2">
+            <Link to="/login">
+              <Button variant="ghost" size="sm">
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button variant="primary" size="sm">
+                Get Started
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );
