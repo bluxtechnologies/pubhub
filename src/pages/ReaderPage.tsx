@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   ArrowLeftIcon,
@@ -16,6 +16,7 @@ import { Skeleton } from '../components/ui/Skeleton';
 import { ErrorState } from '../components/ui/ErrorState';
 import { Avatar } from '../components/ui/Avatar';
 import { useToast } from '../components/ui/ToastProvider';
+import { useReadingProgress } from '../hooks/useReadingProgress';
 
 interface ParagraphComment {
   id: string;
@@ -64,6 +65,22 @@ export const ReaderPage: React.FC = () => {
   const { data: book } = useBookDetails(bookId);
   const { data: chapter, isLoading, error } = useChapterDetails(bookId, chapterId);
   const { data: chapters = [] } = useBookChapters(bookId);
+  const { saveProgress } = useReadingProgress();
+
+  useEffect(() => {
+    if (book && chapter) {
+      const pct = Math.round(((chapter.chapterNumber) / (chapters.length || 1)) * 100);
+      saveProgress({
+        bookId: book.id,
+        chapterId: chapter.id,
+        chapterNumber: chapter.chapterNumber,
+        chapterTitle: chapter.title,
+        bookTitle: book.title,
+        coverImage: book.coverImage,
+        progressPercentage: pct,
+      });
+    }
+  }, [book, chapter, chapters]);
 
   const currentIndex = chapters.findIndex((c) => c.id === chapterId);
   const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
